@@ -1,0 +1,19 @@
+@api = http://localhost:3000/users
+
+GET {{api}}
+###
+POST {{api}}
+Content-Type: application/json
+
+{
+    "id_usuario": 2,
+    "nombre": "Juan",
+    "apellido": "Londono",
+    "correo": "juanlondonoierml@gmail.com",
+    "correo_respaldo": "jmlondono033@soy.sena.edu.co",
+    "num_documento": "1000294330",
+    "num_contrato": "2473196",
+    "num_contacto": "3014179117",
+    "id_rol": 1,
+    "contrasena": "1234"
+}
