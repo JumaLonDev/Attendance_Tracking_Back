@@ -1,19 +1,44 @@
 @api = http://localhost:3000/users
 
+### Pidiendo todos los usuarios
 GET {{api}}
-###
-POST {{api}}
+
+### Agregando un usuario
+POST {{api}} 
 Content-Type: application/json
 
 {
-    "id_usuario": 2,
-    "nombre": "Juan",
-    "apellido": "Londono",
-    "correo": "juanlondonoierml@gmail.com",
-    "correo_respaldo": "jmlondono033@soy.sena.edu.co",
-    "num_documento": "1000294330",
+    "nombre": "Prueba",
+    "apellido": "prueba",
+    "correo": "prueba@gmail.com",
+    "correo_respaldo": "prueba@soy.sena.edu.co",
+    "num_documento": "1000000000",
     "num_contrato": "2473196",
     "num_contacto": "3014179117",
-    "id_rol": 1,
     "contrasena": "1234"
+}
+
+### Pedir un usuario por ID
+GET {{api}}/2
+
+### Eliminando un Producto
+DELETE {{api}}/20
+
+### Traer el total de los usuarios
+GET {{api}}/count
+
+### Actualizar Usuario 
+PUT {{api}}/21
+Content-Type: application/json
+
+{
+  "nombre": "Prueba1",
+  "apellido": "prueba1",
+  "correo": "prueba@gmail.com",
+  "correo_respaldo": "prueba@soy.sena.edu.co",
+  "num_documento": "1000000000",
+  "num_contrato": "2473196",
+  "num_contacto": "3014179117",
+  "id_rol": 2,
+  "contrasena": "1234"
 }

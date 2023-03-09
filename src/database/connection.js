@@ -1,10 +1,10 @@
 import sql from "mssql";
-
+import config from "../config";
 const deSettings = {
-    user: "Attendance_Tracking",
-    password:"attendance2023",
-    server: "localhost",
-    database:"Attendance_Tracking",
+    user: config.dbUser,
+    password: config.dbPassword,
+    server: config.dbServer,
+    database: config.dbDatabase,
     options:{
         ecrypt:true, 
         trustServerCertificate: true,
@@ -20,5 +20,7 @@ export async function getConnection(){
         
     }
 }
+
+export { sql };
 
 
