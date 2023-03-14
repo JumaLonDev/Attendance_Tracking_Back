@@ -8,37 +8,40 @@ POST {{api}}
 Content-Type: application/json
 
 {
-    "nombre": "Prueba",
-    "apellido": "prueba",
-    "correo": "prueba@gmail.com",
-    "correo_respaldo": "prueba@soy.sena.edu.co",
-    "num_documento": "1000000000",
-    "num_contrato": "2473196",
-    "num_contacto": "3014179117",
-    "contrasena": "1234"
+    "nombre": "Juan",
+    "apellido": "Londoño",
+    "correo": "juanlodonoierml@gmail.com",
+    "correo_respaldo": "Eladmin@soy.sena.edu.co",
+    "num_documento": "0000000000",
+    "num_contrato": "0000000",
+    "num_contacto": "0000000000",
+    "contrasena": "1234",
+    "estado_usuario": 1
 }
 
 ### Pedir un usuario por ID
 GET {{api}}/2
 
 ### Eliminando un Producto
-DELETE {{api}}/20
+DELETE {{api}}/24
 
 ### Traer el total de los usuarios
 GET {{api}}/count
 
 ### Actualizar Usuario 
-PUT {{api}}/21
+PUT {{api}}/1
 Content-Type: application/json
 
 {
-  "nombre": "Prueba1",
-  "apellido": "prueba1",
-  "correo": "prueba@gmail.com",
-  "correo_respaldo": "prueba@soy.sena.edu.co",
-  "num_documento": "1000000000",
-  "num_contrato": "2473196",
-  "num_contacto": "3014179117",
-  "id_rol": 2,
-  "contrasena": "1234"
+  "id_usuario": 1,
+  "nombre": "Super",
+  "apellido": "admin",
+  "correo": "attendace@gmail.com",
+  "correo_respaldo": "Eladmin@soy.sena.edu.co",
+  "num_documento": "0000000000",
+  "num_contrato": "0000000",
+  "num_contacto": "0000000000",
+  "id_rol": 1,
+  "contrasena": "1234",
+  "estado_usuario": 1
 }

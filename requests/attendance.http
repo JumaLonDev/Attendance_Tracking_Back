@@ -1,0 +1,32 @@
+@api = http://localhost:3000/attendance
+
+### Traer toda la toma de asistencia
+GET  {{api}}
+
+### Crea una nueva toma de asistencia
+POST {{api}}
+Content-Type: application/json
+
+{
+    "f_inasistencia": "14/03/2023",
+    "observacion": "Diligencia meidca 2",
+    "id_curso": 1,
+    "id_usuario": 2 
+}
+
+### Trae una toma de asistencia por id
+GET {{api}}/2
+
+### Elimina una toma de asistencia por ID
+DELETE {{api}}/5
+
+### Actulizar los datos de una Toma de asistencia
+PUT {{api}}/2
+Content-Type: application/json
+
+{
+    "f_inasistencia": "14/03/2023",
+    "observacion": "Diligencia meidca 1",
+    "id_curso": 1,
+    "id_usuario": 2
+}

@@ -1,0 +1,31 @@
+@api = http://localhost:3000/pqrs
+
+### Trae todos los pqrs
+GET {{api}}
+
+### Crear un nuevo pqrs
+POST  {{api}}	
+Content-Type: application/json
+
+{
+    "id_usuario": 2,
+    "id_curso": 2,
+    "text_pqrs": "Pedro me pego otra vez"
+}
+
+### Trae un PQRS por Id
+GET {{api}}/3
+
+### Elimina un PQRS por ID
+DELETE {{api}}/3
+
+###Trae el total de los PQRS diligenciados 
+GET {{api}}/count
+
+### Actulizar los datos del PQRS 
+PUT {{api}}/2
+Content-Type: application/json
+
+{
+  "text_pqrs": "Hola world"
+}

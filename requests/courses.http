@@ -1,0 +1,36 @@
+@api = http://localhost:3000/courses
+
+### Pidiendo todos los cursos
+
+GET {{api}} 
+
+### Crear un nuevo curso 
+
+POST {{api}} 
+Content-Type: application/json
+
+{
+    "num_curso": "2473196",
+    "nom_curso": "ADSO",
+    "prof_curso": 1
+}
+
+### Trae un curso por ID 
+GET {{api}}/1
+
+### Elimina Cursos por ID
+DELETE {{api}}/3
+
+### Trae el total de los cursos registrados
+GET {{api}}/count
+
+### Actualziar los datos por ID
+PUT {{api}}/1
+Content-Type: application/json
+
+{
+  "num_curso": "2473196",
+  "nom_curso": "ADSO",
+  "prof_curso": 9
+}
+

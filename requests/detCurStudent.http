@@ -1,0 +1,28 @@
+@api = http://localhost:3000/dtll_cur_estu
+
+### Trae todos los detalles de los cursos y estudiantes
+GET {{api}}
+
+### Crear un nuevo detalle de los cursos con los estudiantes
+POST {{api}}
+Content-Type: application/json
+
+{
+    "id_usuario": 2,
+    "id_cursos": 1
+}
+
+###Traer un DetalleCursosEstudiantes por ID
+GET {{api}}/3
+
+###Eliminar un un DetalleCursosEstudiantes por ID
+DELETE {{api}}/3
+
+###Actualizar los datos de un  DetalleCursosEstudiantes por ID
+PUT {{api}}/1
+Content-Type:application/json
+
+{
+    "id_usuario": 2,
+    "id_cursos": 1
+}
