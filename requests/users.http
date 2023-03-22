@@ -8,19 +8,19 @@ POST {{api}}
 Content-Type: application/json
 
 {
-    "nombre": "Juan",
-    "apellido": "Londoño",
-    "correo": "juanlodonoierml@gmail.com",
-    "correo_respaldo": "Eladmin@soy.sena.edu.co",
-    "num_documento": "0000000000",
-    "num_contrato": "0000000",
-    "num_contacto": "0000000000",
-    "contrasena": "1234",
-    "estado_usuario": 1
+  "nombre": "Jhonatan",
+  "apellido": "Ortiz",
+  "correo": "jhonatan@gmail.com",
+  "correo_respaldo": "jh@gmail.com",
+  "num_documento": "1000294330",
+  "num_contrato": "2473196",
+  "num_contacto": "3014179117",
+  "id_rol": 2,
+  "contrasena": "123"
 }
 
 ### Pedir un usuario por ID
-GET {{api}}/2
+GET {{api}}/1
 
 ### Eliminando un Producto
 DELETE {{api}}/24
@@ -34,14 +34,23 @@ Content-Type: application/json
 
 {
   "id_usuario": 1,
-  "nombre": "Super",
-  "apellido": "admin",
-  "correo": "attendace@gmail.com",
+  "nombre": "Janderson",
+  "apellido": "Villamarin",
+  "correo": "janderson@gmail.com",
   "correo_respaldo": "Eladmin@soy.sena.edu.co",
   "num_documento": "0000000000",
   "num_contrato": "0000000",
   "num_contacto": "0000000000",
   "id_rol": 1,
-  "contrasena": "1234",
+  "contrasena": "12345",
   "estado_usuario": 1
+}
+
+### inicar sesión 
+POST {{api}}/login
+Content-Type: application/json
+
+{
+  "correoLogin":"juanlondonoierml@gmail.com",
+  "contrasenaLogin":"123"
 }

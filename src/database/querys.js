@@ -1,19 +1,21 @@
 export const queries =  {
     //Queries de los usuarios
     getAllUsers: 'SELECT * FROM tbl_usuarios',
-    addNewUser: "INSERT INTO tbl_usuarios (nombre, apellido, correo,correo_respaldo, num_documento, num_contrato, num_contacto,id_rol, contrasena, estado_usuario) VALUES (@nombre, @apellido, @correo, @correo_respaldo, @num_documento, @num_contrato, @num_contacto, @id_rol, @contrasena, @estado_usuario)", 
+    addNewUser: "INSERT INTO tbl_usuarios (nombre, apellido, correo, correo_respaldo, num_documento, num_contrato, num_contacto,id_rol, contrasena, estado_usuario) VALUES (@nombre, @apellido, @correo, @correo_respaldo, @num_documento, @num_contrato, @num_contacto, @id_rol, @contrasena, @estado_usuario)", 
     getUserById: "SELECT * FROM tbl_usuarios WHERE id_usuario = @id",
     deleteUser: "DELETE [Attendance_Tracking].[dbo].[tbl_usuarios] WHERE id_usuario = @id", 
     getTotalUsers: "SELECT count(*) FROM [Attendance_Tracking].[dbo].[tbl_usuarios]",
     updatetUserById: "UPDATE tbl_usuarios SET  nombre = @nombre, apellido = @apellido, correo = @correo, correo_respaldo = @correo_respaldo, num_documento = @num_documento, num_contrato = @num_contrato, num_contacto = @num_contacto, id_rol = @id_rol, contrasena = @contrasena, estado_usuario = @estado_usuario  WHERE id_usuario = @id",
+    getUserByEmail: 'SELECT * FROM tbl_usuarios WHERE correo = @correo',
 
     //Queries de los cursos
     getAllCourses: 'SELECT * FROM tbl_cursos',
-    addNewCourse: 'INSERT INTO tbl_cursos (num_curso, nom_curso, prof_curso) VALUES (@num_curso, @nom_curso, @prof_curso)',
+    addNewCourse: 'INSERT INTO tbl_cursos (num_curso, nom_curso, jornada_curso,prof_curso) VALUES (@num_curso, @nom_curso,@jornada_curso, @prof_curso)',
     getCourseById: 'SELECT * FROM tbl_cursos WHERE id_curso = @id',
     deleteCourseById: 'DELETE [Attendance_Tracking].[dbo].[tbl_cursos] WHERE id_curso = @id',
     getTotalCourses:"SELECT count(*) FROM [Attendance_Tracking].[dbo].[tbl_cursos]",
-    updateCourseById: "UPDATE tbl_cursos SET num_curso = @num_curso, nom_curso = @nom_curso, prof_curso = @prof_curso, WHERE id_curso = @id",
+    updateCourseById: "UPDATE tbl_cursos SET num_curso = @num_curso, nom_curso = @nom_curso, jornada_curso = @jornada_curso, prof_curso = @prof_curso, WHERE id_curso = @id",
+    GetUserByIdCourse: "SELECT c.*, u.nombre, u.apellido FROM tbl_cursos c INNER JOIN tbl_dtll_cur_estu de ON c.id_curso = de.id_cursos INNER JOIN tbl_usuarios u ON u.id_usuario = de.id_usuario WHERE c.id_curso = @id ",
 
     //Queries de los PQRS
 
@@ -23,6 +25,7 @@ export const queries =  {
     deletePqrsById: 'DELETE [Attendance_Tracking].[dbo].[tbl_pqrs] WHERE id_pqrs = @id',
     getTotalPqrs: "SELECT count(*) FROM [Attendance_Tracking].[dbo].[tbl_pqrs]",
     updatePqrsById: "UPDATE tbl_pqrs SET text_pqrs = @text_pqrs WHERE id_pqrs = @id",
+    
 
 
     //Queries de la toma de asistencia 
@@ -40,6 +43,7 @@ export const queries =  {
     getAllDetProfCursoById: 'SELECT * FROM dtll_prof_cur WHERE id = @id', 
     deleteDetProfCursoById: 'DELETE [Attendance_Tracking].[dbo].[dtll_prof_cur] WHERE id = @id',
     updateDetProfCurso: 'UPDATE  dtll_prof_cur SET id_usuario = @id_usuario, id_cursos = @id_cursos WHERE id = @id ',
+    GetAllCourseByUser:'SELECT c.* FROM tbl_usuarios u INNER JOIN tbl_dtll_cur_estu de ON u.id_usuario = de.id_usuario INNER JOIN tbl_cursos c ON c.id_curso = de.id_cursos WHERE u.id_usuario = @id',
 
     //Detalles cursos estudiantes 
 

@@ -12,11 +12,12 @@ export const getCourses = async (req, res) => {
 };
 
 export const createNewCourse = async (req, res) => {
-  const { num_curso, nom_curso, prof_curso } = req.body;
+  const { num_curso, nom_curso, jornada_curso, prof_curso } = req.body;
 
   if (
     num_curso == null ||
     nom_curso == null ||
+    jornada_curso == null ||
     prof_curso == null
   ) {
     return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
@@ -28,11 +29,13 @@ export const createNewCourse = async (req, res) => {
       .input("num_curso", sql.NVarChar, num_curso)
       .input("nom_curso", sql.NVarChar, nom_curso)
       .input("prof_curso", sql.Int, prof_curso)
+      .input("jornada_curso", sql.NVarChar, jornada_curso)
       .query(queries.addNewCourse);
 
     res.json({
       num_curso,
       nom_curso,
+      jornada_curso,
       prof_curso,
     });
   } catch (error) {
@@ -76,6 +79,7 @@ export const updateCoursesById = async (req, res) => {
   if (
     num_curso == null ||
     nom_curso == null ||
+    jornada_curso == null ||
     prof_curso == null
   ) {
     return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
@@ -86,6 +90,7 @@ export const updateCoursesById = async (req, res) => {
     .request()
     .input("num_curso", sql.NVarChar, num_curso)
     .input("nom_curso", sql.NVarChar, nom_curso)
+    .input("jornada_curso", sql.NVarChar, jornada_curso)
     .input("prof_curso", sql.Int, prof_curso)
     .input("id", sql.Int, id)
     .query(queries.updateCourseById);
@@ -93,8 +98,20 @@ export const updateCoursesById = async (req, res) => {
     res.json({
       num_curso,
       nom_curso,
-      prof_curso,
+      jornada_curso,
+      prof_curso
     });
 };
+
+export const GetUserByIdCourse = async (req, res) => {
+  const { id } = req.params;
+  const pool = await getConnection();
+  const result = await pool
+    .request()
+    .input("id", id)
+    .query(queries.GetUserByIdCourse);
+  console.log(result);
+  res.send(result.recordset);
+}
 
 

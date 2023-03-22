@@ -1,4 +1,8 @@
+import  Jwt  from "jsonwebtoken";
+import  bcrypt  from "bcryptjs";
 import { getConnection, sql, queries } from "../database";
+import { json } from "express";
+
 
 export const getUsers = async (req, res) => {
   try {
@@ -20,10 +24,10 @@ export const createNewUser = async (req, res) => {
     num_documento,
     num_contrato,
     num_contacto,
-    contrasena,
-    estado_usuario
   } = req.body;
-  let { id_rol } = req.body;
+
+  const contrasena =  bcrypt.hashSync(req.body.contrasena,8) 
+  let { id_rol, estado_usuario } = req.body;
 
   if (
     nombre == null ||
@@ -33,13 +37,12 @@ export const createNewUser = async (req, res) => {
     num_documento == null ||
     num_contrato == null ||
     num_contacto == null ||
-    contrasena == null ||
-    estado_usuario == null
+    contrasena == null 
   ) {
     return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
   }
   if (id_rol == null) id_rol = 3;
-
+  if (estado_usuario == null) estado_usuario = 1;
   try {
     const pool = await getConnection();
     await pool
@@ -50,8 +53,8 @@ export const createNewUser = async (req, res) => {
       .input("correo_respaldo", sql.NVarChar, correo_respaldo)
       .input("num_documento", sql.NVarChar, num_documento)
       .input("num_contrato", sql.NVarChar, num_contrato)
-      .input("id_rol", sql.Int, id_rol)
       .input("num_contacto", sql.NVarChar, num_contacto)
+      .input("id_rol", sql.Int, id_rol)
       .input("contrasena", sql.NVarChar, contrasena)
       .input("estado_usuario", sql.Int, estado_usuario)
       .query(queries.addNewUser);
@@ -64,8 +67,7 @@ export const createNewUser = async (req, res) => {
       num_documento,
       num_contrato,
       num_contacto,
-      contrasena,
-      estado_usuario
+      contrasena
     });
   } catch (error) {
     res.status(500);
@@ -111,9 +113,9 @@ export const updateUserById = async (req, res) => {
     num_contrato,
     num_contacto,
     id_rol,
-    contrasena,
     estado_usuario
   } = req.body;
+  const contrasena =  bcrypt.hashSync(req.body.contrasena,8) 
   const { id } = req.params;
   if (
     nombre == null ||
@@ -124,7 +126,7 @@ export const updateUserById = async (req, res) => {
     num_contrato == null ||
     num_contacto == null ||
     id_rol == null ||
-    contrasena == null ||
+    contrasena== null ||
     estado_usuario == null
   ) {
     return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
@@ -160,3 +162,35 @@ export const updateUserById = async (req, res) => {
       estado_usuario
     });
 };
+
+// Controlador del Login
+export  const login = async (req, res) => {
+  const {correoLogin, contrasenaLogin} = req.body;
+  try {
+    const pool = await getConnection()
+    const result = await pool.request().input("correo", sql.NVarChar, correoLogin).query(queries.getUserByEmail)
+    
+
+
+    if(!result.recordset[0]){
+      res.status(404).json({message: "Error al encontrar el usuario"});
+      return;
+    }
+
+    const isMatched = bcrypt.compareSync(contrasenaLogin,result.recordset[0].contrasena);
+
+    if(!isMatched){
+      res.status(404).json({message: "Las contraseñas no coinciden"});
+      return;
+    }
+    
+    const{id_usuario,nombre,apellido,correo,correo_respaldo,num_documento,num_contrato,num_contacto,id_rol,contrasena,estado_usuario} = result.recordset[0];
+    let data = JSON.stringify({id_usuario,nombre,apellido,correo,correo_respaldo,num_documento,num_contrato,num_contacto,id_rol,contrasena,estado_usuario})
+
+    const token = Jwt.sign(data, process.env.auth_token_key);
+    res.json({token});
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({message: "No se pudo iniciar sesión"})
+  }
+} 

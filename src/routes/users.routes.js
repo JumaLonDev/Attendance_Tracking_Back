@@ -1,13 +1,14 @@
 import { Router } from "express";
-import { createNewUser, getUsers, getUserById, deleteUserById, getTotalUsers, updateUserById } from "../controllers/users.controller";
-
+const users = require("../controllers/users.controller");
 const router = Router();
+const auth = require('../middleware/auth');
 
-router.get("/users", getUsers); // Trae todos los ususarios 
-router.post("/users", createNewUser);  //Agrega un usuario
-router.get("/users/count", getTotalUsers); // Contar cuantos usuarios hay 
-router.get("/users/:id", getUserById); // Trae a un usuario por ID
-router.delete("/users/:id", deleteUserById); //Eliminar un usuario por ID
-router.put("/users/:id", updateUserById); // Actualziar datos del usuario por ID
+router.get("/users", auth.verifyToken,users.getUsers); // Trae todos los ususarios 
+router.post("/users", users.createNewUser);  //Agrega un usuario
+router.get("/users/count",auth.verifyToken, users.getTotalUsers); // Contar cuantos usuarios hay 
+router.get("/users/:id", auth.verifyToken, users.getUserById); // Trae a un usuario por ID
+router.delete("/users/:id",auth.verifyToken, users.deleteUserById); //Eliminar un usuario por ID
+router.put("/users/:id",auth.verifyToken, users.updateUserById); // Actualziar datos del usuario por ID
+router.post("/users/login", users.login);
 
 export default router

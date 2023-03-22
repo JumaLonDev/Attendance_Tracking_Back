@@ -69,3 +69,13 @@ export const updateDCEById = async (req, res) => {
 
     res.json({id_usuario, id_cursos});
 }
+
+export const GetAllCourseByUser = async(req,res) => {
+    const { id } = req.params;
+    const pool = await getConnection();
+    const result = await pool.request()
+    .input("id", sql.Int, id)
+    .query(queries.GetAllCourseByUser)
+    
+    res.json(result.recordset);
+}
