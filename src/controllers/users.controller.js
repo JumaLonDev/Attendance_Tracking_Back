@@ -33,9 +33,7 @@ export const createNewUser = async (req, res) => {
     nombre == null ||
     apellido == null ||
     correo == null ||
-    correo_respaldo == null ||
     num_documento == null ||
-    num_contrato == null ||
     num_contacto == null ||
     contrasena == null 
   ) {
@@ -104,7 +102,6 @@ export const updateUserById = async (req, res) => {
     nombre,
     apellido,
     correo,
-    correo_respaldo,
     num_documento,
     num_contrato,
     num_contacto,
@@ -117,9 +114,7 @@ export const updateUserById = async (req, res) => {
     nombre == null ||
     apellido == null ||
     correo == null ||
-    correo_respaldo == null ||
     num_documento == null ||
-    num_contrato == null ||
     num_contacto == null ||
     id_rol == null ||
     contrasena== null ||

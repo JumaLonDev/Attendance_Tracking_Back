@@ -12,7 +12,7 @@ export const getAttendance = async (req, res) => {
 }
 
 export const CreateNewAttendance = async (req, res) => {
-    const { f_inasistencia, observacion , id_curso, id_usuario } = req.body;
+    const { f_inasistencia, observacion , id_curso, id_usuario, c_inasistencia} = req.body;
   
     if (observacion == null || id_curso == null || id_usuario == null ) {
       return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
@@ -26,8 +26,9 @@ export const CreateNewAttendance = async (req, res) => {
         .input("observacion", sql.NVarChar, observacion)
         .input("id_curso", sql.Int, id_curso)
         .input("id_usuario", sql.Int, id_usuario)
+        .input("c_inasistencia", sql.Int, c_inasistencia)
         .query(queries.addNewAttendace);
-      res.json({ f_inasistencia, observacion , id_curso, id_usuario });
+      res.json({ f_inasistencia, observacion , id_curso, id_usuario, c_inasistencia });
     } catch (error) {
       res.status(500);
       res.send(error.message);
@@ -53,7 +54,7 @@ export const deleteAttendanceById = async (req, res) => {
 }
 
 export const updateAttendanceById = async (req, res) => {
-    const { f_inasistencia, observacion , id_curso, id_usuario } = req.body;
+    const { f_inasistencia, observacion , id_curso, id_usuario, c_inasistencia } = req.body;
     const { id } = req.params;
     if (observacion == null || id_curso == null || id_usuario == null ) {
         return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
@@ -66,7 +67,8 @@ export const updateAttendanceById = async (req, res) => {
         .input("id_curso", sql.Int, id_curso)
         .input("id_usuario", sql.Int, id_usuario)
         .input("id", sql.Int, id)
+        .input("c_inasistencia", sql.Int, c_inasistencia)
         .query(queries.updateAttendanceById);
 
-      res.json({ f_inasistencia, observacion , id_curso, id_usuario });  
+      res.json({ f_inasistencia, observacion , id_curso, id_usuario, c_inasistencia });  
 }
