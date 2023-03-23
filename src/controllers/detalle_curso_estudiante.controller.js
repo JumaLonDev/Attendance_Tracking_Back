@@ -12,24 +12,30 @@ export const getDetalleCursosEstudiantes = async (req, res) => {
 
 //Crear un nuevo DetalleCursosEstudiantes
 export const createNewDCE = async (req, res) => {
-    const{id_usuario, id_cursos} = req.body
-    if(id_usuario == null || id_cursos == null){
+    const{id_usuario, cod_cursos} = req.body
+    if(id_usuario == null || cod_cursos == null){
         return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
     }
-
     try {
         const pool = await getConnection();
-        await pool.request()
-        .input("id_usuario", sql.Int, id_usuario)
-        .input("id_cursos", sql.Int, id_cursos)
-        .query(queries.addNewDetCurStudent)
-
-        res.json({id_usuario, id_cursos});
-
-    } catch (error) {
-        res.status(500).send(error.message);
+        const result = await pool.request()
+        .input("cod_cursos", cod_cursos)
+            .query(queries.getCurseByUserStudent);
+            if(!result){
+                return res.status(400).json({ msg: "Bad Request. El curso no existe" });
+            }else{
+                let id_cursos = result.recordset[0].id_curso;
+                console.log(id_cursos);
+                await pool.request()
+                .input("id_usuario", sql.Int, id_usuario)
+                .input("id_cursos", sql.Int, id_cursos)
+                .query(queries.addNewDetCurStudent)
+                res.json({id_usuario, id_cursos});
+            }
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
     }
-}
 
 // Traer un DetalleCursosEstudiantes por ID
 export const getDCEById = async(req, res) =>{

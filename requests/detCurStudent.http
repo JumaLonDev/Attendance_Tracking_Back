@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
     "id_usuario": 2,
-    "id_cursos": 1
+    "cod_cursos": 1
 }
 
 ###Traer un DetalleCursosEstudiantes por ID

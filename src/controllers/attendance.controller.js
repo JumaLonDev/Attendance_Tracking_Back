@@ -14,7 +14,7 @@ export const getAttendance = async (req, res) => {
 export const CreateNewAttendance = async (req, res) => {
     const { f_inasistencia, observacion , id_curso, id_usuario } = req.body;
   
-    if (f_inasistencia == null || observacion == null || id_curso == null || id_usuario == null ) {
+    if (observacion == null || id_curso == null || id_usuario == null ) {
       return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
     }
   
@@ -40,7 +40,6 @@ export const getAttendanceById = async (req, res) => {
     const result = await pool.request()
     .input("id", id)
     .query(queries.getAllAnttendanceById);
-    console.log(result);
     res.send(result.recordset[0]);
 }
 
@@ -56,7 +55,7 @@ export const deleteAttendanceById = async (req, res) => {
 export const updateAttendanceById = async (req, res) => {
     const { f_inasistencia, observacion , id_curso, id_usuario } = req.body;
     const { id } = req.params;
-    if (f_inasistencia == null || observacion == null || id_curso == null || id_usuario == null ) {
+    if (observacion == null || id_curso == null || id_usuario == null ) {
         return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
     } 
     const pool = await getConnection();

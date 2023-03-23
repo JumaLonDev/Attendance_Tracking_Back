@@ -51,7 +51,6 @@ export const getCourseById = async (req, res) => {
     .request()
     .input("id", id)
     .query(queries.getCourseById);
-  console.log(result);
   res.send(result.recordset[0]);
 };
 
@@ -68,7 +67,6 @@ export const deleteCourseById = async (req, res) => {
 export const getTotalCourses = async (req,res) => {
   const pool = await getConnection(); 
   const result = await pool.request().query(queries.getTotalCourses);
-  console.log(result);
 
   res.json(result.recordset[0][""]);
 };
@@ -110,7 +108,6 @@ export const GetUserByIdCourse = async (req, res) => {
     .request()
     .input("id", id)
     .query(queries.GetUserByIdCourse);
-  console.log(result);
   res.send(result.recordset);
 }
 

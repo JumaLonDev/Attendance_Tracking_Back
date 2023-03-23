@@ -82,8 +82,6 @@ export const getUserById = async (req, res) => {
     .request()
     .input("id", id)
     .query(queries.getUserById);
-  console.log(result);
-
   res.send(result.recordset[0]);
 };
 
@@ -98,8 +96,6 @@ export const deleteUserById = async (req, res) => {
 export const getTotalUsers = async (req, res) => {
   const pool = await getConnection();
   const result = await pool.request().query(queries.getTotalUsers);
-  console.log(result);
-
   res.json(result.recordset[0][""]);
 };
 

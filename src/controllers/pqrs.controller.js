@@ -40,7 +40,6 @@ export const getPqrsById = async (req, res) => {
     .request()
     .input("id", id)
     .query(queries.getPqrsById);
-  console.log(result);
   res.send(result.recordset[0]);
 };
 
@@ -57,8 +56,6 @@ export const deletePqrsById = async (req, res) => {
 export const getTotalPqrs = async (req, res) => {
   const pool = await getConnection();
   const result = await pool.request().query(queries.getTotalPqrs);
-  console.log(result);
-
   res.json(result.recordset[0][""]);
 };
 

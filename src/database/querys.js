@@ -15,7 +15,7 @@ export const queries =  {
     deleteCourseById: 'DELETE [Attendance_Tracking].[dbo].[tbl_cursos] WHERE id_curso = @id',
     getTotalCourses:"SELECT count(*) FROM [Attendance_Tracking].[dbo].[tbl_cursos]",
     updateCourseById: "UPDATE tbl_cursos SET num_curso = @num_curso, nom_curso = @nom_curso, jornada_curso = @jornada_curso, prof_curso = @prof_curso, WHERE id_curso = @id",
-    GetUserByIdCourse: "SELECT c.*, u.nombre, u.apellido FROM tbl_cursos c INNER JOIN tbl_dtll_cur_estu de ON c.id_curso = de.id_cursos INNER JOIN tbl_usuarios u ON u.id_usuario = de.id_usuario WHERE c.id_curso = @id ",
+    GetUserByIdCourse: "SELECT c.*, u.id_usuario, u.nombre, u.apellido FROM tbl_cursos c INNER JOIN tbl_dtll_cur_estu de ON c.id_curso = de.id_cursos INNER JOIN tbl_usuarios u ON u.id_usuario = de.id_usuario WHERE c.id_curso = @id ",
 
     //Queries de los PQRS
 
@@ -51,5 +51,6 @@ export const queries =  {
     addNewDetCurStudent: 'INSERT INTO tbl_dtll_cur_estu (id_usuario, id_cursos) VALUES (@id_usuario, @id_cursos)',
     getDetCurStudent: 'SELECT * FROM  tbl_dtll_cur_estu WHERE id_detalle_es = @id',
     deleteDetCurStudent:'DELETE [Attendance_Tracking].[dbo].[tbl_dtll_cur_estu] WHERE id_detalle_es = @id',
-    updateDetCurStudent:'UPDATE tbl_dtll_cur_estu SET id_usuario = @id_usuario, id_cursos = @id_cursos  WHERE id_detalle_es = @id'
+    updateDetCurStudent:'UPDATE tbl_dtll_cur_estu SET id_usuario = @id_usuario, id_cursos = @id_cursos  WHERE id_detalle_es = @id',
+    getCurseByUserStudent: 'SELECT * FROM tbl_cursos WHERE num_curso = @cod_cursos',
 }

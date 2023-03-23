@@ -38,7 +38,6 @@ export const getDetalleProfeCursoById = async (req,res) =>{
     const result = await pool.request()
     .input("id", id)
     .query(queries.getAllDetProfCursoById);
-    console.log(result);
     res.send(result.recordset[0]);
 }
 
