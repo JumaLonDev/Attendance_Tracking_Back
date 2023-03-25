@@ -12,9 +12,9 @@ export const getPqrs = async (req, res) => {
 };
 
 export const CreateNewPqrs = async (req, res) => {
-  const { id_usuario, id_curso, text_pqrs } = req.body;
+  const { id_usuario,text_pqrs, tipo_pqrs } = req.body;
 
-  if (id_usuario == null || id_curso == null || text_pqrs == null) {
+  if (id_usuario == null ||  text_pqrs == null || tipo_pqrs == null) {
     return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
   }
 
@@ -23,10 +23,10 @@ export const CreateNewPqrs = async (req, res) => {
     await pool
       .request()
       .input("id_usuario", sql.Int, id_usuario)
-      .input("id_curso", sql.Int, id_curso)
       .input("text_pqrs", sql.NVarChar, text_pqrs)
+      .input("tipo_pqrs", sql.NVarChar, tipo_pqrs)
       .query(queries.addNewPqrs);
-    res.json({ id_usuario, id_curso, text_pqrs });
+    res.json({ id_usuario,text_pqrs, tipo_pqrs });
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -41,6 +41,18 @@ export const getPqrsById = async (req, res) => {
     .input("id", id)
     .query(queries.getPqrsById);
   res.send(result.recordset[0]);
+};
+
+export const GetPqrsByUser = async (req, res) => {
+  const { id } = req.params;
+  const pool = await getConnection();
+  const result = await pool
+    .request()
+    .input("id", id)
+    .query(queries.GetPqrsByUser);
+
+  console.log(result);
+  res.send(result.recordset);
 };
 
 export const deletePqrsById = async (req, res) => {
@@ -58,6 +70,8 @@ export const getTotalPqrs = async (req, res) => {
   const result = await pool.request().query(queries.getTotalPqrs);
   res.json(result.recordset[0][""]);
 };
+
+
 
 export const updatePqrsById = async (req, res) => {
   const {text_pqrs } = req.body;

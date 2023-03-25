@@ -102,13 +102,13 @@ export const updateUserById = async (req, res) => {
     nombre,
     apellido,
     correo,
+    correo_respaldo,
     num_documento,
     num_contrato,
     num_contacto,
     id_rol,
     estado_usuario
   } = req.body;
-  const contrasena =  bcrypt.hashSync(req.body.contrasena,8) 
   const { id } = req.params;
   if (
     nombre == null ||
@@ -116,15 +116,14 @@ export const updateUserById = async (req, res) => {
     correo == null ||
     num_documento == null ||
     num_contacto == null ||
-    id_rol == null ||
-    contrasena== null ||
-    estado_usuario == null
+    id_rol == null 
   ) {
     return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
   }
+  if (estado_usuario == null) estado_usuario = 1;
 
   const pool = await getConnection();
-  await pool
+  const result = await pool
     .request()
     .input("nombre", sql.NVarChar, nombre)
     .input("apellido", sql.NVarChar, apellido)
@@ -134,12 +133,10 @@ export const updateUserById = async (req, res) => {
     .input("num_contrato", sql.NVarChar, num_contrato)
     .input("id_rol", sql.Int, id_rol)
     .input("num_contacto", sql.NVarChar, num_contacto)
-    .input("contrasena", sql.NVarChar, contrasena)
     .input("id", sql.Int, id)
     .input("estado_usuario", sql.Int, estado_usuario)
     .query(queries.updatetUserById)
-
-
+    
     res.json({
       nombre,
       apellido,
@@ -149,7 +146,6 @@ export const updateUserById = async (req, res) => {
       num_contrato,
       num_contacto,
       id_rol,
-      contrasena,
       estado_usuario
     });
 };

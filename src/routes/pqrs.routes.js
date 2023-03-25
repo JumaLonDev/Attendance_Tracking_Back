@@ -10,5 +10,6 @@ router.get("/pqrs/:id", auth.verifyToken, pqrs.getPqrsById); // Trae los PQRS Po
 router.delete("/pqrs/:id", auth.verifyToken, pqrs.deletePqrsById);// Elimina los Pqrs por ID
 router.get("/pqrs/count", auth.verifyToken, pqrs.getTotalPqrs);//Trae el total de los PQRS deligenciados
 router.put("/pqrs/:id", auth.verifyToken, pqrs.updatePqrsById);//Actuzaliza los datos del PQRS por ID
+router.get("/pqrs/pqrsByUser/:id", auth.verifyToken, pqrs.GetPqrsByUser)
 
 export default router; 

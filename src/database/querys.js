@@ -5,7 +5,7 @@ export const queries =  {
     getUserById: "SELECT * FROM tbl_usuarios WHERE id_usuario = @id",
     deleteUser: "DELETE [Attendance_Tracking].[dbo].[tbl_usuarios] WHERE id_usuario = @id", 
     getTotalUsers: "SELECT count(*) FROM [Attendance_Tracking].[dbo].[tbl_usuarios]",
-    updatetUserById: "UPDATE tbl_usuarios SET  nombre = @nombre, apellido = @apellido, correo = @correo, correo_respaldo = @correo_respaldo, num_documento = @num_documento, num_contrato = @num_contrato, num_contacto = @num_contacto, id_rol = @id_rol, contrasena = @contrasena, estado_usuario = @estado_usuario  WHERE id_usuario = @id",
+    updatetUserById: "UPDATE tbl_usuarios SET  nombre = @nombre, apellido = @apellido, correo = @correo, correo_respaldo = @correo_respaldo, num_documento = @num_documento, num_contrato = @num_contrato, num_contacto = @num_contacto, id_rol = @id_rol, estado_usuario = @estado_usuario  WHERE id_usuario = @id",
     getUserByEmail: 'SELECT * FROM tbl_usuarios WHERE correo = @correo',
 
     //Queries de los cursos
@@ -20,11 +20,12 @@ export const queries =  {
     //Queries de los PQRS
 
     getAllPqrs: 'SELECT * FROM tbl_pqrs ',
-    addNewPqrs: 'INSERT INTO tbl_pqrs (id_usuario, id_curso, text_pqrs) VALUES (@id_usuario, @id_curso, @text_pqrs)',
+    addNewPqrs: 'INSERT INTO tbl_pqrs (id_usuario,text_pqrs, tipo_pqrs) VALUES (@id_usuario,@text_pqrs, @tipo_pqrs)',
     getPqrsById: 'SELECT * FROM tbl_pqrs WHERE id_pqrs = @id',
     deletePqrsById: 'DELETE [Attendance_Tracking].[dbo].[tbl_pqrs] WHERE id_pqrs = @id',
     getTotalPqrs: "SELECT count(*) FROM [Attendance_Tracking].[dbo].[tbl_pqrs]",
     updatePqrsById: "UPDATE tbl_pqrs SET text_pqrs = @text_pqrs WHERE id_pqrs = @id",
+    GetPqrsByUser: "SELECT p.*, u.nombre, u.apellido, u.num_documento FROM tbl_pqrs p INNER JOIN tbl_usuarios u ON p.id_usuario = u.id_usuario WHERE p.id_usuario = @id",
     
 
 
