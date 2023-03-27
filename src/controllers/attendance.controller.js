@@ -26,7 +26,6 @@ export const CreateNewAttendance = async (req, res) => {
         .input("id_usuario", sql.Int, element.id_usuario)
         .input("c_inasistencia", sql.Int, element.c_inasistencia)
         .query(queries.addNewAttendace);
-      // res.json({f_inasistencia, observacion , id_curso, id_usuario, c_inasistencia });
       res.status(200)
       });
     } catch (error) {

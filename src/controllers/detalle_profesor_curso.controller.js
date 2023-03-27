@@ -13,11 +13,9 @@ export const getDetalleProfesor = async (req, res) => {
 
 export const createNewDetalleProfeCurso = async (req, res) => {
     const {id_usuario, id_curso} = req.body; 
-
     if(id_usuario == null || id_curso == null){
         return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
     }
-
     try {
         const pool = await getConnection();
         await pool.request()

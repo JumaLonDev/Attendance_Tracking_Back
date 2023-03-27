@@ -36,9 +36,7 @@ export const queries =  {
     getAllAnttendanceById: 'SELECT * FROM tbl_asistencias WHERE id_asistencia = @id',
     deleteAttendanceById: 'DELETE [Attendance_Tracking].[dbo].[tbl_asistencias] WHERE id_asistencia = @id',
     updateAttendanceById: 'UPDATE tbl_asistencias SET f_inasistencia = @f_inasistencia, observacion = @observacion, id_curso = @id_curso, id_usuario = @id_usuario, c_inasistencia = @c_inasistencia WHERE id_asistencia = @id',
-
     //Detalle profesor cursos
-
     getAllDetProfCurso: 'SELECT * FROM dtll_prof_cur',
     addNewDetProfCurso: 'INSERT INTO dtll_prof_cur (id_usuario, id_cursos) VALUES (@id_usuario, @id_curso)',
     getAllDetProfCursoById: 'SELECT * FROM dtll_prof_cur WHERE id = @id', 
