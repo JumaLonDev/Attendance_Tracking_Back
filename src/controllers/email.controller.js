@@ -6,7 +6,7 @@ export const sendEmailAdve  = async (req, res) => {
     try {
         // send mail with defined transport object
          const message  = {
-          from: '"  " <attendancetracking2022@gmail.com>', // sender address
+          from: '" Attendance Tracking " <attendancetracking2022@gmail.com>', // sender address
           to: correo, // list of receivers
           subject: "Se le ha enviado el correo de advertencia", // Subject line
           html: `
