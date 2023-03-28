@@ -1,5 +1,6 @@
 import { getConnection, sql, queries} from "../database"; 
 
+
 export const getAttendance = async (req, res) => {
     try {
          const pool = await getConnection();
@@ -70,4 +71,29 @@ export const updateAttendanceById = async (req, res) => {
         .query(queries.updateAttendanceById);
 
       res.json({ f_inasistencia, observacion , id_curso, id_usuario, c_inasistencia  });  
+}
+
+export const coutAnttendanceByid = async (req, res) =>{
+  const { id } = req.params; 
+
+  const pool = await getConnection();
+  const result = await pool	
+  .request()
+  .input("id", sql.Int, id)
+  .query(queries.countAttendanceById);
+
+  res.json(result.recordset[0][""]);
+}
+
+
+export const getReportAttendance = async (req, res) =>{
+  const { id } = req.params; 
+
+  const pool = await getConnection();
+  const result = await pool	
+  .request()
+  .input("id", sql.Int, id)
+  .query(queries.getReportAttendanceById);
+
+  res.json(result.recordset);
 }

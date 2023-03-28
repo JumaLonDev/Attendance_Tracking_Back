@@ -15,7 +15,7 @@ export const queries =  {
     deleteCourseById: 'DELETE [Attendance_Tracking].[dbo].[tbl_cursos] WHERE id_curso = @id',
     getTotalCourses:"SELECT count(*) FROM [Attendance_Tracking].[dbo].[tbl_cursos]",
     updateCourseById: "UPDATE tbl_cursos SET num_curso = @num_curso, nom_curso = @nom_curso, jornada_curso = @jornada_curso, prof_curso = @prof_curso, WHERE id_curso = @id",
-    GetUserByIdCourse: "SELECT c.*, u.id_usuario, u.nombre, u.apellido FROM tbl_cursos c INNER JOIN tbl_dtll_cur_estu de ON c.id_curso = de.id_cursos INNER JOIN tbl_usuarios u ON u.id_usuario = de.id_usuario WHERE c.id_curso = @id ",
+    GetUserByIdCourse: "SELECT c.*, u.id_usuario, u.nombre, u.apellido, u.correo FROM tbl_cursos c INNER JOIN tbl_dtll_cur_estu de ON c.id_curso = de.id_cursos INNER JOIN tbl_usuarios u ON u.id_usuario = de.id_usuario WHERE c.id_curso = @id ",
 
     //Queries de los PQRS
 
@@ -36,6 +36,8 @@ export const queries =  {
     getAllAnttendanceById: 'SELECT * FROM tbl_asistencias WHERE id_asistencia = @id',
     deleteAttendanceById: 'DELETE [Attendance_Tracking].[dbo].[tbl_asistencias] WHERE id_asistencia = @id',
     updateAttendanceById: 'UPDATE tbl_asistencias SET f_inasistencia = @f_inasistencia, observacion = @observacion, id_curso = @id_curso, id_usuario = @id_usuario, c_inasistencia = @c_inasistencia WHERE id_asistencia = @id',
+    countAttendanceById: 'SELECT COUNT(*) FROM tbl_asistencias where id_usuario = @id ',
+    getReportAttendanceById:'SELECT a.f_inasistencia, u.nombre, u.apellido, c.nom_curso  FROM tbl_asistencias a INNER JOIN tbl_usuarios u ON a.id_usuario = u.id_usuario INNER JOIN tbl_cursos c ON c.id_curso = a.id_curso WHERE u.id_usuario = @id', 
     //Detalle profesor cursos
     getAllDetProfCurso: 'SELECT * FROM dtll_prof_cur',
     addNewDetProfCurso: 'INSERT INTO dtll_prof_cur (id_usuario, id_cursos) VALUES (@id_usuario, @id_curso)',
