@@ -3,6 +3,7 @@ import { config } from "dotenv";
 config();
 
 export default{
+    DBPORT: process.env.DBPORT,
     port: process.env.PORT || 3000,
     dbUser:  process.env.DB_USER || '',
     dbPassword: process.env.DB_PASSWORD || '',

@@ -6,6 +6,7 @@ const deSettings = {
     server: config.dbServer,
     database: config.dbDatabase,
     options:{
+        port: config.DBPORT,
         ecrypt:true, 
         trustServerCertificate: true,
     },
