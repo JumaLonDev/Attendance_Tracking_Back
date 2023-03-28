@@ -4,7 +4,7 @@ import { getConnection, sql, queries} from "../database";
 export const getAttendance = async (req, res) => {
     try {
          const pool = await getConnection();
-         const result = await pool.request().query(queries.getAllAnttendance);
+         const result = await pool.request().query(queries.getAllReport);
          res.json(result.recordset);
     } catch (error) {
         res.status(500); 
@@ -97,3 +97,4 @@ export const getReportAttendance = async (req, res) =>{
 
   res.json(result.recordset);
 }
+

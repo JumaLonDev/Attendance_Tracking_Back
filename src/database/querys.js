@@ -38,6 +38,7 @@ export const queries =  {
     updateAttendanceById: 'UPDATE tbl_asistencias SET f_inasistencia = @f_inasistencia, observacion = @observacion, id_curso = @id_curso, id_usuario = @id_usuario, c_inasistencia = @c_inasistencia WHERE id_asistencia = @id',
     countAttendanceById: 'SELECT COUNT(*) FROM tbl_asistencias where id_usuario = @id ',
     getReportAttendanceById:'SELECT a.f_inasistencia, u.nombre, u.apellido, c.nom_curso  FROM tbl_asistencias a INNER JOIN tbl_usuarios u ON a.id_usuario = u.id_usuario INNER JOIN tbl_cursos c ON c.id_curso = a.id_curso WHERE u.id_usuario = @id', 
+    getAllReport: 'SELECT a.f_inasistencia, u.nombre, u.apellido, c.nom_curso  FROM tbl_asistencias a INNER JOIN tbl_usuarios u ON a.id_usuario = u.id_usuario INNER JOIN tbl_cursos c ON c.id_curso = a.id_curso',
     //Detalle profesor cursos
     getAllDetProfCurso: 'SELECT * FROM dtll_prof_cur',
     addNewDetProfCurso: 'INSERT INTO dtll_prof_cur (id_usuario, id_cursos) VALUES (@id_usuario, @id_curso)',

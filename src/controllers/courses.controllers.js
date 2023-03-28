@@ -12,16 +12,16 @@ export const getCourses = async (req, res) => {
 };
 
 export const createNewCourse = async (req, res) => {
-  const { num_curso, nom_curso, jornada_curso, prof_curso } = req.body;
-
+  const { num_curso, nom_curso, jornada_curso } = req.body;
+  let {prof_curso} = req.body
   if (
     num_curso == null ||
     nom_curso == null ||
-    jornada_curso == null ||
-    prof_curso == null
+    jornada_curso == null
   ) {
     return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
   }
+  if (prof_curso == null) prof_curso = 1;
   try {
     const pool = await getConnection();
     await pool
